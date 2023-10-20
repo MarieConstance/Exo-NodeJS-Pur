@@ -4,11 +4,9 @@ login.addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
-  const name = document.querySelector(".name").value;
   const data = {
     email: email,
     password: password,
-    name: name,
   };
   console.log(data);
 
