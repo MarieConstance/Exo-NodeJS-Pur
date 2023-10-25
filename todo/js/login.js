@@ -25,9 +25,9 @@ login.addEventListener("submit", async (e) => {
         messageErreur.textContent = res;
         messageErreur.style.color = "green";
 
-        setTimeout(()=>{
-            window.location.href="./dashboard.html"
-        },5000)
+        // setTimeout(()=>{
+        //     window.location.href="./dashboard.html"
+        // },5000) 
       
     })
     .catch((error) => console.log(error));

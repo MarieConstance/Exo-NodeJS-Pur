@@ -28,13 +28,21 @@ const server = http.createServer((req, res) => {
       if (verif) {
         res.end("Désolé ce utilisateur exist déjà .");
       }
-      userData.push(body);
-      fs.writeFileSync(
-        path.join("assets", "Data", "users.json"),
-        JSON.stringify(userData),
-        { encoding: "UTF-8" }
-      );
+      else{
+        let oldId = userData[userData.length-1]
+        let id = oldId === undefined ? 1: parseInt(oldId.id)+1
+        console.log(id);
+        let data = {id:id, ...body};
+        console.log(data);
+        userData.push(data);
+        fs.writeFileSync(
+          path.join("assets", "Data", "users.json"),
+          JSON.stringify(userData),
+          { encoding: "UTF-8" }
+        );
       res.end("Inscription effectué avec succes !!!");
+      }
+      
     });
   }
   else if(req.url === "/auth/login" && req.method === "POST"){
@@ -56,7 +64,7 @@ const server = http.createServer((req, res) => {
       if (verify) {
         const {email,name} = verify;
         console.log(email,name);
-        let data = {status:true,email,name,message:"Bienvenue vous êtes maintenant connecté"}
+        let data = {status:true, email, name, message:"Bienvenue vous êtes maintenant connecté"}
         res.end(JSON.stringify(data));  
       }
       else{
