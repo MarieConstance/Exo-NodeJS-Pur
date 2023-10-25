@@ -16,7 +16,7 @@ login.addEventListener("submit", async (e) => {
     body: JSON.stringify(data),
   })
     .then((res) => res.json())
-    .then((res) => {
+    .then((res) => {   
         console.log(res);
         if (res === "Email ou mot de passe incorrect") {
             messageErreur.textContent = res;
@@ -25,9 +25,10 @@ login.addEventListener("submit", async (e) => {
         messageErreur.textContent = res;
         messageErreur.style.color = "green";
 
-        // setTimeout(()=>{
-        //     window.location.href="./dashboard.html"
-        // },5000) 
+        setTimeout(()=>{
+          localStorage.setItem("session", res.id)
+            window.location.href="./dashboard.html"
+        },2000) 
       
     })
     .catch((error) => console.log(error));

@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
 
   if (req.url === "/auth/register" && req.method === "POST") {
     let body = "";
-    req.on("data", (data) => {
+    req.on("data", (data) => {     
       body += data;
     });
     req.on("end", () => {
@@ -64,17 +64,21 @@ const server = http.createServer((req, res) => {
       if (verify) {
         const {email,name} = verify;
         console.log(email,name);
-        let data = {status:true, email, name, message:"Bienvenue vous êtes maintenant connecté"}
+        let data = {status:true, email, name,id:verify.id, message:"Bienvenue vous êtes maintenant connecté"}
         res.end(JSON.stringify(data));  
       }
       else{
         let data = {status:false,message:"Email ou mot de passe incorrecte"}
         res.end(JSON.stringify(data));
       }
-    })
+    });
 
-  }
+  };
+  // else if (){
+
+  // }
 }); 
+
 server.listen(4000, () => {
   console.log("server running");
 });
