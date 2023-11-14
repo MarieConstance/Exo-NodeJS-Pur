@@ -5,6 +5,7 @@ import path from "node:path";
 
 const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
+  console.log(req.url, req.method);
 
   if (req.url === "/auth/register" && req.method === "POST") {
     let body = "";
@@ -80,7 +81,10 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(data));
       }
     });
-  } else if (req.url === "/addTasks" && req.method === "POST") {
+  }else if(req.url.startsWith("/getUser") && req.method === "GET"){
+    console.log("enter ...")
+  }
+   else if (req.url === "/addTasks" && req.method === "POST") {
     let body = "";
     req.on("data", (data) => {
       body += data;
